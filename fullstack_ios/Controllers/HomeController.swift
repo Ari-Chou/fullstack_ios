@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class HomeController: UITableViewController {
     
@@ -17,7 +18,7 @@ class HomeController: UITableViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationItem.rightBarButtonItem = .init(title: "SignIn", style: .plain, target: self, action: #selector(handleLogin))
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         showCookie()
         fetchPost()
     }
@@ -51,12 +52,19 @@ class HomeController: UITableViewController {
 
 extension HomeController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        cell.backgroundColor = .red
+        let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
+        let post = posts[indexPath.row]
+        cell.usernameLabel.text = post.user.fullName
+        cell.userPostTextLabel.text = post.text
+        cell.userPostImageView.sd_setImage(with: URL(string: post.imageUrl), completed: nil)
         return cell
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 547
     }
 }

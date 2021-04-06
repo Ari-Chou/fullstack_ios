@@ -11,6 +11,7 @@ struct Post: Decodable {
     let id: String
     let text: String
     let createdAt: Int
+    let imageUrl: String
     let user: User
 }
 

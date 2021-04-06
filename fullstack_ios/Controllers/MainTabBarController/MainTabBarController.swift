@@ -15,15 +15,19 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         tabBar.tintColor = .black
         setViewControllers([
-         generateNavigationController(rootViewController: HomeController(), title: "Home", image: UIImage(systemName: "house")!, tag: 1),
-            generateNavigationController(rootViewController: ProfileController(), title: "Profile", image: UIImage(systemName: "person.fill")!, tag: 2),
+            generateNavigationController(rootViewController: HomeController(), title: "Home", image: UIImage(systemName: "house")!, tag: 1),
+            generateNavigationController(rootViewController: CreatePostController(), title: nil, image: UIImage(systemName: "plus.rectangle.fill")!, tag: 2),
+            generateNavigationController(rootViewController: ProfileController(), title: "Profile", image: UIImage(systemName: "person.fill")!, tag: 3),
         ], animated: false)
     }
+    
+    // MARK: - Functions
+    
 }
 
 
 extension MainTabBarController {
-    fileprivate func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage, tag: Int) -> UIViewController {
+    fileprivate func generateNavigationController(rootViewController: UIViewController, title: String?, image: UIImage, tag: Int) -> UIViewController {
             let navController = UINavigationController(rootViewController: rootViewController)
             rootViewController.navigationItem.title = title
             navController.tabBarItem.image = image

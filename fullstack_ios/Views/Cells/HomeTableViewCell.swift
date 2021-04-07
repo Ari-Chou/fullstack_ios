@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol PostCellOptionDelegate {
+protocol PostCellOptionDelegate: class {
     func handlePostOption(cell: HomeTableViewCell)
 }
 
@@ -18,7 +18,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var userPostImageView: UIImageView!
     @IBOutlet weak var userPostTextLabel: UILabel!
-    var delegate: PostCellOptionDelegate?
+    weak var delegate: PostCellOptionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

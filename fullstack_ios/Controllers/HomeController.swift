@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Alamofire
 
 class HomeController: UITableViewController {
     
@@ -54,6 +55,7 @@ extension HomeController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let post = posts[indexPath.row]
+        cell.delegate = self
         cell.usernameLabel.text = post.user.fullName
         cell.userPostTextLabel.text = post.text
         cell.userPostImageView.sd_setImage(with: URL(string: post.imageUrl), completed: nil)
@@ -66,5 +68,32 @@ extension HomeController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 547
+    }
+}
+
+// MARK: - Delete post
+extension HomeController: PostCellOptionDelegate {
+    func handlePostOption(cell: HomeTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let post = self.posts[indexPath.row]
+        let url = "\(Service.shared.baseUrl)/post/\(post.id)"
+        
+        let alertController = UIAlertController(title: "Delete Post?", message: nil, preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (_) in
+            AF.request(url, method: .delete)
+                .validate(statusCode: 200..<300)
+                .response {[weak self] (dataResponse) in
+                    if let error = dataResponse.error {
+                        print("Failed to hit the server", error.localizedDescription)
+                        return
+                    }
+                    self?.posts.remove(at: indexPath.row)
+                    self?.tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
 }

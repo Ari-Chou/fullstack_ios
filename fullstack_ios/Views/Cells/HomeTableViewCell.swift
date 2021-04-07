@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PostCellOptionDelegate {
+    func handlePostOption(cell: HomeTableViewCell)
+}
+
 class HomeTableViewCell: UITableViewCell {
 
     // MARK: - Propertise
@@ -14,7 +18,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var userPostImageView: UIImageView!
     @IBOutlet weak var userPostTextLabel: UILabel!
-    
+    var delegate: PostCellOptionDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,9 +30,10 @@ class HomeTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func moreButton(_ sender: Any) {
-        print("Apple")
+    @IBAction func optionButton(_ sender: Any) {
+        delegate?.handlePostOption(cell: self)
     }
+    
     @IBAction func likeButton(_ sender: Any) {
     }
     

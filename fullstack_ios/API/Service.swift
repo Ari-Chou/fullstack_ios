@@ -12,6 +12,27 @@ class Service: NSObject {
     static let shared = Service()
     let baseUrl = "http://localhost:1337"
     
+    
+    func searchForUsers(completion: @escaping (Result<[User], Error>) -> ()) {
+        let url = "\(baseUrl)/search"
+        AF.request(url)
+            .validate(statusCode: 200..<300)
+            .responseData { (dataResponse) in
+                if let err = dataResponse.error {
+                    completion(.failure(err))
+                    return
+                }
+                
+                do {
+                    let data = dataResponse.data ?? Data()
+                    let users = try JSONDecoder().decode([User].self, from: data)
+                    completion(.success(users))
+                } catch {
+                    completion(.failure(error))
+            }
+        }
+    }
+    
     func login(email: String, password: String, completion: @escaping (Result<Data, Error>) -> ()) {
         let params = ["emailAddress": email, "password": password]
         let url = "\(baseUrl)/api/v1/entrance/login"
@@ -41,7 +62,7 @@ class Service: NSObject {
                 } catch {
                     completion(.failure(error))
                 }
-        }
+            }
     }
     
     func signUp(fullName: String, emailAddress: String, password: String, completion: @escaping (Result<Data, Error>) -> ()) {
@@ -55,6 +76,6 @@ class Service: NSObject {
                     return
                 }
                 completion(.success(dataResp.data ?? Data()))
-        }
+            }
     }
 }

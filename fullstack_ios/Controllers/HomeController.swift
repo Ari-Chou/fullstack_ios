@@ -18,8 +18,7 @@ class HomeController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = .init(title: "SignIn", style: .plain, target: self, action: #selector(handleLogin))
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        navigationItem.rightBarButtonItems = [.init(title: "SignIn", style: .plain, target: self, action: #selector(handleLogin)), .init(title: "Search", style: .plain, target: self, action: #selector(handleSearch))]
         showCookie()
         fetchPost()
     }
@@ -29,6 +28,12 @@ class HomeController: UITableViewController {
         let nav = UINavigationController(rootViewController: LoginController())
         
         present(nav, animated: true, completion: nil)
+    }
+    
+    @objc func handleSearch() {
+        let nv = UINavigationController(rootViewController: UsersSearchController())
+        present(nv, animated: true, completion: nil)
+        
     }
     
     fileprivate func showCookie() {

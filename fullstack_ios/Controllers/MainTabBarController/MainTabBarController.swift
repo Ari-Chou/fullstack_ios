@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
         setViewControllers([
             generateNavigationController(rootViewController: HomeController(), title: "Home", image: UIImage(systemName: "house")!, tag: 1),
             generateNavigationController(rootViewController: CreatePostController(), title: nil, image: UIImage(systemName: "plus.rectangle.fill")!, tag: 2),
-            generateNavigationController(rootViewController: ProfileController(), title: "Profile", image: UIImage(systemName: "person.fill")!, tag: 3),
+            generateNavigationController(rootViewController: UserProfileController(userId: ""), title: "Profile", image: UIImage(systemName: "person.fill")!, tag: 3),
         ], animated: false)
     }
     

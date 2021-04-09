@@ -24,6 +24,7 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchUserProfile()
+        setupNavItem()
     }
     
     init(userId: String) {
@@ -47,7 +48,10 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
     
     // MARK: - Functions
     fileprivate func fetchUserProfile() {
-        let url = "\(Service.shared.baseUrl)/user/\(userId)"
+        let currentUserProfileUrl = "\(Service.shared.baseUrl)/profile"
+        let publicUserProfileUrl = "\(Service.shared.baseUrl)/user/\(userId)"
+        
+        let url = self.userId.isEmpty ? currentUserProfileUrl : publicUserProfileUrl
         
         let hud = JGProgressHUD(style: .light)
         hud.textLabel.text = "Fetching..."
@@ -88,6 +92,17 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
             self?.collectionView.reloadData()
             self?.delegate?.toggleFolllowButtonState(isFollowing: isFollowing)
         }
+    }
+    
+    // Setup navigationItem base on the
+    fileprivate func setupNavItem() {
+        if userId.isEmpty {
+            navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(handleSetting))
+        }
+    }
+    
+    @objc fileprivate func handleSetting() {
+        
     }
 }
 

@@ -18,7 +18,8 @@ class HomeController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.rightBarButtonItems = [.init(title: "SignIn", style: .plain, target: self, action: #selector(handleLogin)), .init(title: "Search", style: .plain, target: self, action: #selector(handleSearch))]
+        navigationItem.leftBarButtonItem = .init(title: "SignIn", style: .plain, target: self, action: #selector(handleLogin))
+        navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleSearch))
         showCookie()
         fetchPost()
     }

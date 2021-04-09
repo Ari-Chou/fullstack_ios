@@ -16,7 +16,6 @@
 		6ADB023F261B73F100D88266 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6ADB023E261B73F100D88266 /* Assets.xcassets */; };
 		6ADB0242261B73F100D88266 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ADB0240261B73F100D88266 /* LaunchScreen.storyboard */; };
 		6ADB0259261B76F200D88266 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0258261B76F200D88266 /* MainTabBarController.swift */; };
-		6ADB025D261B786500D88266 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB025C261B786500D88266 /* ProfileController.swift */; };
 		6ADB0272261BF49200D88266 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0270261BF49200D88266 /* LoginController.swift */; };
 		6ADB0273261BF49200D88266 /* LoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6ADB0271261BF49200D88266 /* LoginController.xib */; };
 		6ADB027A261C27B600D88266 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0279261C27B600D88266 /* Models.swift */; };
@@ -45,7 +44,6 @@
 		6ADB0241261B73F100D88266 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6ADB0243261B73F100D88266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ADB0258261B76F200D88266 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		6ADB025C261B786500D88266 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
 		6ADB0270261BF49200D88266 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		6ADB0271261BF49200D88266 /* LoginController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginController.xib; sourceTree = "<group>"; };
 		6ADB0279261C27B600D88266 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				6ADB0239261B73F000D88266 /* HomeController.swift */,
 				6ADB0284261C7E4E00D88266 /* CreatePostController.swift */,
 				6ADB0285261C7E4E00D88266 /* CreatePostController.xib */,
-				6ADB025C261B786500D88266 /* ProfileController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -328,7 +325,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ADB025D261B786500D88266 /* ProfileController.swift in Sources */,
 				6A6EA9FD261F18DB00AB3EB8 /* UserProfileCell.swift in Sources */,
 				6ADB0286261C7E4E00D88266 /* CreatePostController.swift in Sources */,
 				6ADB0272261BF49200D88266 /* LoginController.swift in Sources */,

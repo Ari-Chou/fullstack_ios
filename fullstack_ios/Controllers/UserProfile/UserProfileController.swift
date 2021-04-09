@@ -71,6 +71,7 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
                     let user = try JSONDecoder().decode(User.self, from: data)
                     self.items = user.posts ?? []
                     self.user = user
+                    self.user?.profileButtonIsEditable = self.userId.isEmpty 
                     self.collectionView.reloadData()
                 } catch {
                     print("Failed to decode user:", error)
@@ -102,7 +103,13 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
     }
     
     @objc fileprivate func handleSetting() {
+        let alertController = UIAlertController(title: "LogOut", message: nil, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            print("Log out")
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
+        present(alertController, animated: true, completion: nil)
     }
 }
 

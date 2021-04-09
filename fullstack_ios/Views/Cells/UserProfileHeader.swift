@@ -14,6 +14,9 @@ class UserProfileHeader: UICollectionReusableView {
     
     let followButton = UIButton(title: "Follow", titleColor: .black, font: .boldSystemFont(ofSize: 13), target: self, action: #selector(handleFollow))
     
+    // this button will show when the profile page is belong the current login user.
+    let editProfileButton = UIButton(title: "Edit Profile", titleColor: .white, font: .boldSystemFont(ofSize: 13), backgroundColor: .black, target: self, action: #selector(handleEditProfile))
+    
     let postsCountLabel = UILabel(text: "12", font: .boldSystemFont(ofSize: 14), textAlignment: .center)
     let postsLabel = UILabel(text: "posts", font: .systemFont(ofSize: 13), textColor: .lightGray, textAlignment: .center)
     
@@ -43,6 +46,10 @@ class UserProfileHeader: UICollectionReusableView {
         userProfileController?.followAndUnfollowTapped()
     }
     
+    @objc func handleEditProfile() {
+        
+    }
+    
     var user: User! {
         didSet {
             profileImageView.image = UIImage(systemName: "person.circle")
@@ -50,6 +57,12 @@ class UserProfileHeader: UICollectionReusableView {
             followButton.setTitle(user.isFollowing == true ? "Unfollow" : "Follow", for: .normal)
             followButton.backgroundColor = user.isFollowing == true ? .black : .white
             followButton.setTitleColor(user.isFollowing == true ? .white : .black, for: .normal)
+            
+            if user.profileButtonIsEditable == true {
+                followButton.removeFromSuperview()
+            } else {
+                editProfileButton.removeFromSuperview()
+            }
             
             postsCountLabel.text = "\(user.posts?.count ?? 0)"
             followersCountLabel.text = "\(user.followers?.count ?? 0)"
@@ -63,6 +76,8 @@ class UserProfileHeader: UICollectionReusableView {
         
         followButton.layer.cornerRadius = 15
         followButton.layer.borderWidth = 1
+        editProfileButton.layer.cornerRadius = 15
+        editProfileButton.layer.borderWidth = 1
         
         profileImageView.layer.cornerRadius = 40
         profileImageView.layer.borderWidth = 1
@@ -71,6 +86,7 @@ class UserProfileHeader: UICollectionReusableView {
         stack(
             profileImageView,
             followButton.withSize(.init(width: 100, height: 28)),
+            editProfileButton.withSize(.init(width: 100, height: 28)),
             hstack(stack(postsCountLabel, postsLabel),
                    stack(followersCountLabel, followersLabel),
                    stack(followingCountLabel, followingLabel),

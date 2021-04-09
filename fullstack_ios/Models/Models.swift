@@ -23,4 +23,5 @@ struct User: Decodable {
     var posts: [Post]?
     var following: [User]?
     var followers: [User]?
+    var profileButtonIsEditable: Bool?
 }

@@ -47,12 +47,13 @@ class UserProfileHeader: UICollectionReusableView {
     }
     
     @objc func handleEditProfile() {
-        
+        userProfileController?.changeUserProfileImage()
     }
     
     var user: User! {
         didSet {
             profileImageView.image = UIImage(systemName: "person.circle")
+            profileImageView.sd_setImage(with: URL(string: user.profileImageUrl ?? ""))
             fullNameLabel.text = user?.fullName
             followButton.setTitle(user.isFollowing == true ? "Unfollow" : "Follow", for: .normal)
             followButton.backgroundColor = user.isFollowing == true ? .black : .white
@@ -64,6 +65,8 @@ class UserProfileHeader: UICollectionReusableView {
                 editProfileButton.removeFromSuperview()
             }
             
+            bioLabel.text = user.bio
+            
             postsCountLabel.text = "\(user.posts?.count ?? 0)"
             followersCountLabel.text = "\(user.followers?.count ?? 0)"
             followingCountLabel.text = "\(user.following?.count ?? 0)"
@@ -73,6 +76,7 @@ class UserProfileHeader: UICollectionReusableView {
     
     fileprivate func layoutElement() {
         profileImageView.isUserInteractionEnabled = true
+        profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleEditProfile)))
         
         followButton.layer.cornerRadius = 15
         followButton.layer.borderWidth = 1

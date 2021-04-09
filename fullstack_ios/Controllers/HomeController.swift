@@ -22,6 +22,7 @@ class HomeController: UITableViewController {
         navigationItem.rightBarButtonItem = .init(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(handleSearch))
         showCookie()
         fetchPost()
+        setupRefreshController()
     }
     
     // MARK: - Functions
@@ -43,8 +44,9 @@ class HomeController: UITableViewController {
         })
     }
     
-    func fetchPost() {
+    @objc func fetchPost() {
         Service.shared.fetchPosts { (res) in
+            self.tableView.refreshControl?.endRefreshing()
             switch res {
             case .failure(let err):
                 print("Failed to fetch posts:", err)
@@ -53,6 +55,12 @@ class HomeController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+    }
+    
+    func setupRefreshController() {
+        let rc = UIRefreshControl()
+        rc.addTarget(self, action: #selector(fetchPost), for: .valueChanged)
+        self.tableView.refreshControl = rc
     }
 }
 

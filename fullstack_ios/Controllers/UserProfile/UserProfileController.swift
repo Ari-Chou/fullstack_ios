@@ -47,7 +47,7 @@ class UserProfileController: LBTAListHeaderController<UserProfileCell, Post, Use
     
     
     // MARK: - Functions
-    fileprivate func fetchUserProfile() {
+     func fetchUserProfile() {
         let currentUserProfileUrl = "\(Service.shared.baseUrl)/profile"
         let publicUserProfileUrl = "\(Service.shared.baseUrl)/user/\(userId)"
         
@@ -131,5 +131,66 @@ extension UserProfileController: UICollectionViewDelegateFlowLayout {
             return .zero
         }
         return .init(width: 0, height: 300)
+    }
+}
+
+extension UserProfileController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func changeUserProfileImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let originalImage = info[.originalImage] as? UIImage {
+            self.uploadUserProfileImage(image: originalImage)
+        } else if let editedImage = info[.editedImage] as? UIImage {
+            self.uploadUserProfileImage(image: editedImage)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadUserProfileImage(image: UIImage) {
+        let hud = JGProgressHUD(style: .light)
+        hud.textLabel.text = "Uploading..."
+        hud.show(in: view)
+        // upload user profile image
+        let url = "\(Service.shared.baseUrl)/profile"
+       
+        guard let user = self.user else { return }
+        
+        AF.upload(multipartFormData: { (formData) in
+            // Post Text
+            formData.append(Data(user.fullName.utf8), withName: "fullName")
+            let bioData = Data((user.bio ?? "").utf8)
+            formData.append(bioData, withName: "bio")
+            
+            // Post Image
+            guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
+            formData.append(imageData, withName: "imageFile", fileName: "Doesn'tMatterSoMuch", mimeType: "image/jpg")
+        }, to: url,
+        method: .post,
+        headers: nil)
+        .responseJSON(completionHandler: { data in
+        }).response { (dataResp) in
+            
+            if let error = dataResp.error {
+                print("Failed to hit server", error.localizedDescription)
+                return
+            }
+            if let code = dataResp.response?.statusCode, code >= 300 {
+                print("Failed upload with", code)
+                return
+            }
+            hud.dismiss()
+            print("Scussfully uploated user profile")
+            self.fetchUserProfile()
+        }
     }
 }

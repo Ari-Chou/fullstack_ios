@@ -58,7 +58,7 @@ class CreatePostController: UIViewController, UIImagePickerControllerDelegate, U
                 hud.textLabel.text = "Uploading\n\(Int(progress.fractionCompleted * 100))% Complete"
             }
         }).responseJSON(completionHandler: { data in
-        }).response { (dataResp) in
+        }).response {[weak self] (dataResp) in
             switch dataResp.result {
             case .success(let result):
                 hud.dismiss()
@@ -75,14 +75,20 @@ class CreatePostController: UIViewController, UIImagePickerControllerDelegate, U
                 
                 print("Successfully created post, here is the response:")
                 
-                self.dismiss(animated: true) {
-                    self.homeController?.fetchPost()
+                self?.dismiss(animated: true) {
+                    self?.refreshHomeController()
                 }
             case .failure(let err):
                 print("upload err: \(err)")
             }
-            self.view.endEditing(true)
+            self?.view.endEditing(true)
         }
+    }
+    
+    
+    fileprivate func refreshHomeController() {
+        guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+        mainTabBarController.refreshPost()
     }
     
     func imageViewAction() {

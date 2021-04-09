@@ -13,6 +13,7 @@ struct Post: Decodable {
     let createdAt: Int
     let imageUrl: String
     let user: User
+    let fromNow: String
 }
 
 struct User: Decodable {

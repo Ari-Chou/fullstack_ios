@@ -18,6 +18,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userAvatarImageView: UIImageView!
     @IBOutlet weak var userPostImageView: UIImageView!
     @IBOutlet weak var userPostTextLabel: UILabel!
+    @IBOutlet weak var postTimeLabel: UILabel!
     var delegate: PostCellOptionDelegate?
     
     override func awakeFromNib() {

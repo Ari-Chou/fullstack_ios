@@ -72,7 +72,9 @@ extension HomeController {
         cell.delegate = self
         cell.usernameLabel.text = post.user.fullName
         cell.userPostTextLabel.text = post.text
+        cell.postTimeLabel.text = post.fromNow
         cell.userPostImageView.sd_setImage(with: URL(string: post.imageUrl), completed: nil)
+        cell.userAvatarImageView.sd_setImage(with: URL(string: post.user.profileImageUrl ?? ""), completed: nil)
         return cell
     }
     

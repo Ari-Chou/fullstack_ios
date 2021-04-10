@@ -69,7 +69,8 @@ extension HomeController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = Bundle.main.loadNibNamed("HomeTableViewCell", owner: self, options: nil)?.first as! HomeTableViewCell
         let post = posts[indexPath.row]
-        cell.delegate = self
+        cell.cellOptionButtonDelegate = self
+        cell.cellCommentButtonDelegate = self
         cell.usernameLabel.text = post.user.fullName
         cell.userPostTextLabel.text = post.text
         cell.postTimeLabel.text = post.fromNow
@@ -111,5 +112,15 @@ extension HomeController: PostCellOptionDelegate {
         
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Comment post
+extension HomeController: PostCellCommentDelegate {
+    func handleCommentButton(cell: HomeTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let post = self.posts[indexPath.row]
+        let vc = CommentController(postId: post.id)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

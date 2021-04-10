@@ -27,6 +27,7 @@ class MainTabBarController: UITabBarController {
     
     // MARK: - Functions
     func refreshPost() {
+        print(".........................")
         homeController.fetchPost()
         userProfileController.fetchUserProfile()
     }

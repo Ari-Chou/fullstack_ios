@@ -7,8 +7,12 @@
 
 import UIKit
 
-protocol PostCellOptionDelegate {
+protocol PostCellOptionDelegate: class {
     func handlePostOption(cell: HomeTableViewCell)
+}
+
+protocol PostCellCommentDelegate: class {
+    func handleCommentButton(cell: HomeTableViewCell)
 }
 
 class HomeTableViewCell: UITableViewCell {
@@ -19,7 +23,8 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var userPostImageView: UIImageView!
     @IBOutlet weak var userPostTextLabel: UILabel!
     @IBOutlet weak var postTimeLabel: UILabel!
-    var delegate: PostCellOptionDelegate?
+    weak var cellOptionButtonDelegate: PostCellOptionDelegate?
+    weak var cellCommentButtonDelegate: PostCellCommentDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,13 +37,14 @@ class HomeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     @IBAction func optionButton(_ sender: Any) {
-        delegate?.handlePostOption(cell: self)
+        cellOptionButtonDelegate?.handlePostOption(cell: self)
     }
     
     @IBAction func likeButton(_ sender: Any) {
     }
     
     @IBAction func messageButton(_ sender: Any) {
+        cellCommentButtonDelegate?.handleCommentButton(cell: self)
     }
     @IBAction func sendButton(_ sender: Any) {
     }

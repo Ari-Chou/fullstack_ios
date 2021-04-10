@@ -45,10 +45,17 @@ class LoginController: UIViewController {
             case .failure:
                 print("Failed to log in......")
             case .success:
+                self.refreshHomeController()
                 self.dismiss(animated: true)
             }
         }
     }
+    
+    fileprivate func refreshHomeController() {
+        guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else { return }
+        mainTabBarController.refreshPost()
+    }
+    
     
     @IBAction func goToRegisterPage(_ sender: Any) {
         let vc = RegisterController()

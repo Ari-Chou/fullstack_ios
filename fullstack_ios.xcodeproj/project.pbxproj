@@ -10,6 +10,9 @@
 		6A6EA9FA261F18B300AB3EB8 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6EA9F9261F18B300AB3EB8 /* UserProfileController.swift */; };
 		6A6EA9FD261F18DB00AB3EB8 /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6EA9FC261F18DB00AB3EB8 /* UserProfileCell.swift */; };
 		6A6EAA07261F336100AB3EB8 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6EAA06261F336100AB3EB8 /* UserProfileHeader.swift */; };
+		6A6EAA152621751C00AB3EB8 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6EAA142621751C00AB3EB8 /* CommentController.swift */; };
+		6A6EAA1A262184FD00AB3EB8 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A6EAA18262184FD00AB3EB8 /* CommentTableViewCell.swift */; };
+		6A6EAA1B262184FD00AB3EB8 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6A6EAA19262184FD00AB3EB8 /* CommentTableViewCell.xib */; };
 		6ADB0236261B73F000D88266 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0235261B73F000D88266 /* AppDelegate.swift */; };
 		6ADB0238261B73F000D88266 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0237261B73F000D88266 /* SceneDelegate.swift */; };
 		6ADB023A261B73F000D88266 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ADB0239261B73F000D88266 /* HomeController.swift */; };
@@ -36,6 +39,9 @@
 		6A6EA9F9261F18B300AB3EB8 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		6A6EA9FC261F18DB00AB3EB8 /* UserProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		6A6EAA06261F336100AB3EB8 /* UserProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		6A6EAA142621751C00AB3EB8 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
+		6A6EAA18262184FD00AB3EB8 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		6A6EAA19262184FD00AB3EB8 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		6ADB0232261B73F000D88266 /* fullstack_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fullstack_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ADB0235261B73F000D88266 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6ADB0237261B73F000D88266 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +92,14 @@
 				6A6EA9F9261F18B300AB3EB8 /* UserProfileController.swift */,
 			);
 			path = UserProfile;
+			sourceTree = "<group>";
+		};
+		6A6EAA132621750800AB3EB8 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				6A6EAA142621751C00AB3EB8 /* CommentController.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		6ADB0229261B73EF00D88266 = {
@@ -149,6 +163,7 @@
 		6ADB024E261B74AA00D88266 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A6EAA132621750800AB3EB8 /* Comment */,
 				6A6EA9F8261F189B00AB3EB8 /* UserProfile */,
 				6ADB0295261EE81400D88266 /* Search */,
 				6ADB026F261BF47400D88266 /* Auth */,
@@ -176,6 +191,8 @@
 				6ADB029B261EE89E00D88266 /* UserSearchCell.swift */,
 				6A6EA9FC261F18DB00AB3EB8 /* UserProfileCell.swift */,
 				6A6EAA06261F336100AB3EB8 /* UserProfileHeader.swift */,
+				6A6EAA18262184FD00AB3EB8 /* CommentTableViewCell.swift */,
+				6A6EAA19262184FD00AB3EB8 /* CommentTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -267,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A6EAA1B262184FD00AB3EB8 /* CommentTableViewCell.xib in Resources */,
 				6ADB0287261C7E4E00D88266 /* CreatePostController.xib in Resources */,
 				6ADB027F261C2F0C00D88266 /* RegisterController.xib in Resources */,
 				6ADB0242261B73F100D88266 /* LaunchScreen.storyboard in Resources */,
@@ -331,9 +349,11 @@
 				6ADB023A261B73F000D88266 /* HomeController.swift in Sources */,
 				6A6EA9FA261F18B300AB3EB8 /* UserProfileController.swift in Sources */,
 				6ADB0236261B73F000D88266 /* AppDelegate.swift in Sources */,
+				6A6EAA1A262184FD00AB3EB8 /* CommentTableViewCell.swift in Sources */,
 				6ADB028B261C8D5F00D88266 /* HomeTableViewCell.swift in Sources */,
 				6ADB029C261EE89E00D88266 /* UserSearchCell.swift in Sources */,
 				6ADB027E261C2F0C00D88266 /* RegisterController.swift in Sources */,
+				6A6EAA152621751C00AB3EB8 /* CommentController.swift in Sources */,
 				6ADB0282261C45F400D88266 /* Service.swift in Sources */,
 				6A6EAA07261F336100AB3EB8 /* UserProfileHeader.swift in Sources */,
 				6ADB0259261B76F200D88266 /* MainTabBarController.swift in Sources */,

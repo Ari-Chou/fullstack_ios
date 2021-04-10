@@ -14,6 +14,7 @@ struct Post: Decodable {
     let imageUrl: String
     let user: User
     let fromNow: String
+    var comments: [Comment]?
 }
 
 struct User: Decodable {
@@ -27,4 +28,10 @@ struct User: Decodable {
     var profileButtonIsEditable: Bool?
     var bio: String?
     var profileImageUrl: String?
+}
+
+struct Comment: Decodable {
+    let text: String
+    let user: User
+    let fromNow: String
 }
